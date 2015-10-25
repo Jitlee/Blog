@@ -10,18 +10,18 @@
 		<!-- Enable responsive viewport -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/syntax/syntax.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/syntax/syntax.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/font-awesome/css/font-awesome.min.css">
 		<link rel="icon" href="https://raw.githubusercontent.com/talk2ankan/uno-dbyll/gh-pages/uno-dbyll.png">
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="http://jitlee.github.io/blog/assets/resources/bootstrap/js/bootstrap.js"></script>
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				if(window.location.href=="http://127.0.0.1:4000/") {
+				if(window.location.href.replace(/\/$/g, "")=="http://jitlee.github.io/blog") {
 					$("#sidebar").css({width:'100%'});
 					$("#btnblog").click(function(){
 						$("#sidebar").animate({width:'33.3333%'},'slow');
@@ -59,17 +59,17 @@
 				</a>
 				
 
-				<a class="navbar-brand" href="http://127.0.0.1:4000/">
-					<img src="/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
+				<a class="navbar-brand" href="http://jitlee.github.io/blog">
+					<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
 				</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="navbarHeaderCollapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="http://127.0.0.1:4000/">主页</a></li>
-					<li><a href="http://127.0.0.1:4000//categories.html">分类</a></li>
-					<li><a href="http://127.0.0.1:4000//tags.html">标签</a></li>
+					<li class="active"><a href="http://jitlee.github.io/blog">主页</a></li>
+					<li><a href="http://jitlee.github.io/blog/categories.html">分类</a></li>
+					<li><a href="http://jitlee.github.io/blog/tags.html">标签</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -82,9 +82,9 @@
 				<i class="fa fa-bars"></i>
 			</button>
 			<ul class="dropdown-menu pull-right" role="menu">
-				<li><a href="http://127.0.0.1:4000/"><i class="fa fa-home"></i>主页</a></li>
-				<li><a href="http://127.0.0.1:4000//categories.html"><i class="fa fa-folder"></i>分类</a></li>
-				<li><a href="http://127.0.0.1:4000//tags.html"><i class="fa fa-tags"></i>标签</a></li>
+				<li><a href="http://jitlee.github.io/blog"><i class="fa fa-home"></i>主页</a></li>
+				<li><a href="http://jitlee.github.io/blog/categories.html"><i class="fa fa-folder"></i>分类</a></li>
+				<li><a href="http://jitlee.github.io/blog/tags.html"><i class="fa fa-tags"></i>标签</a></li>
 				<li class="divider"></li>
 				<li><a href="#"><i class="fa fa-arrow-up"></i>返回顶部</a></li>
 			</ul>
@@ -94,11 +94,11 @@
 			<! -- sidebar.html -->
 <header class="sidebar-header" role="banner">
 	<div class="sidebar-header-body">
-		<a href="http://127.0.0.1:4000/">
-			<img src="/jitlee.gif" class="img-circle" />
+		<a href="http://jitlee.github.io/blog">
+			<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle" />
 		</a>
 		<h3>
-	        <a class="title" href="http://127.0.0.1:4000/">Jitlee-Wan</a>
+	        <a class="title" href="http://jitlee.github.io/blog">Jitlee-Wan</a>
 	        <p class="role">如果你简单，这个世界就对你简单</p>
 	    </h3>
 	    <hr class="hr-line"/>
@@ -108,16 +108,16 @@
 	    <hr class="hr-line"/>
 	   <ul class="navgation navgation-primary">
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#post" target="_self">博客</a>
+		       	<a id="btnblog" href="http://jitlee.github.io/blog/#post" onclick="" target="_self">博客</a>
 	      	</li>
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#source" target="_self">项目</a>
+		       	<a href="http://jitlee.github.io/blog/#source" target="_self">项目</a>
 	      	</li>
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#" target="_self">订阅</a>
+		       	<a href="http://jitlee.github.io/blog/#" target="_self">订阅</a>
 	      	</li>
 	   		<li>
-		       	<a href="/about.html" target="_self">关于</a>
+		       	<a href="http://jitlee.github.io/blog/about.html" target="_self">关于</a>
 	      	</li>
 	    </ul>
 	 	<ul class="navgation navgation-social">
@@ -392,7 +392,7 @@ foo函数的调用者实际是window，所以foo函数内部的this也是window�
 		<ul class="tag_box list-unstyled list-inline">
 			<li><i class="fa fa-folder-open"></i></li>
 			  
-			<li><a href="http://127.0.0.1:4000//categories.html#javascript-ref">
+			<li><a href="http://jitlee.github.io/blog/categories.html#javascript-ref">
           javascript <span>(1)</span>
           
         </a></li>
@@ -403,35 +403,35 @@ foo函数的调用者实际是window，所以foo函数内部的this也是window�
 			<li><i class="fa fa-tags"></i></li>
 			  
 			<li>
-				<a href="http://127.0.0.1:4000//tags.html#js-ref">
+				<a href="http://jitlee.github.io/blog/tags.html#js-ref">
           js <span>(1)</span>
           ,
           </a>
 			</li>
 			
 			<li>
-				<a href="http://127.0.0.1:4000//tags.html#面向对象-ref">
+				<a href="http://jitlee.github.io/blog/tags.html#面向对象-ref">
           面向对象 <span>(1)</span>
           ,
           </a>
 			</li>
 			
 			<li>
-				<a href="http://127.0.0.1:4000//tags.html#this-ref">
+				<a href="http://jitlee.github.io/blog/tags.html#this-ref">
           this <span>(1)</span>
           ,
           </a>
 			</li>
 			
 			<li>
-				<a href="http://127.0.0.1:4000//tags.html#指针-ref">
+				<a href="http://jitlee.github.io/blog/tags.html#指针-ref">
           指针 <span>(1)</span>
           ,
           </a>
 			</li>
 			
 			<li>
-				<a href="http://127.0.0.1:4000//tags.html#前端-ref">
+				<a href="http://jitlee.github.io/blog/tags.html#前端-ref">
           前端 <span>(1)</span>
           
           </a>
@@ -454,7 +454,7 @@ foo函数的调用者实际是window，所以foo函数内部的this也是window�
 			</section>
 
 			<section class="col-sm-6 author">
-				<img src="/jitlee.gif" style="height:100px;width:100px;" class="img-rounded author-image" />
+				<img src="http://jitlee.github.io/blog/jitlee.gif" style="height:100px;width:100px;" class="img-rounded author-image" />
 				<h4 class="section-title author-name"><b>Jitlee-Wan</b><br/><p style="color:#888;font-size:13px;">如果你简单，这个世界就对你简单</p></h4>
 				<p class="author-bio">嗨，我是万佳，一名来自深圳的js/swift开发狗，现在就职与一家互联网创业公司。</p>
 			</section>
@@ -466,14 +466,28 @@ foo函数的调用者实际是window，所以foo函数内部的this也是window�
 			
 			<li class="previous disabled"><a>&larr; 上一篇</a></li>
 			 
-			<li class="next"><a href="http://127.0.0.1:4000//html5-image-editor" title="HTML5图片选剪裁择器">下一篇 &rarr;</a></li>
+			<li class="next"><a href="http://jitlee.github.io/blog/html5-image-editor" title="HTML5图片选剪裁择器">下一篇 &rarr;</a></li>
 			
 		</ul>
 
 	</div>
 
-	<div id="disqus_thread"></div>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/the-keywords-in-javascript" data-title="JavaScript之关键字this" data-url=""/the-keywords-in-javascript></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jitlee"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+	<!-- 多说公共JS代码 end -->
 
 </article>
 <div class="clearfix"></div>
@@ -481,9 +495,10 @@ foo函数的调用者实际是window，所以foo函数内部的this也是window�
 			<footer class="navbar navbar-default">
 				<div class="container">
 					<p class="navbar-text pull-left">&copy; 2015 Jitlee.Wan
-						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建， 采用
-						<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术， 感谢talk2ankan提供的
-						<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题。
+						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建
+						采用<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术
+						感谢talk2ankan提供的<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题和 <a class="navbar-button" href="http://duoshuo.com/">多说</a>提供的评论系统
+						最重要的是感谢我最亲爱的老婆<b>zoey</b>
 					</p>
 				</div>
 			</footer>

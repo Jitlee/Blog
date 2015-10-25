@@ -9,18 +9,18 @@
 		<!-- Enable responsive viewport -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/syntax/syntax.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/syntax/syntax.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/font-awesome/css/font-awesome.min.css">
 		<link rel="icon" href="https://raw.githubusercontent.com/talk2ankan/uno-dbyll/gh-pages/uno-dbyll.png">
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="http://jitlee.github.io/blog/assets/resources/bootstrap/js/bootstrap.js"></script>
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				if(window.location.href=="http://127.0.0.1:4000/") {
+				if(window.location.href.replace(/\/$/g, "")=="http://jitlee.github.io/blog") {
 					$("#sidebar").css({width:'100%'});
 					$("#btnblog").click(function(){
 						$("#sidebar").animate({width:'33.3333%'},'slow');
@@ -58,17 +58,17 @@
 				</a>
 				
 
-				<a class="navbar-brand" href="http://127.0.0.1:4000/">
-					<img src="/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
+				<a class="navbar-brand" href="http://jitlee.github.io/blog">
+					<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
 				</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="navbarHeaderCollapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="http://127.0.0.1:4000/">主页</a></li>
-					<li><a href="http://127.0.0.1:4000//categories.html">分类</a></li>
-					<li><a href="http://127.0.0.1:4000//tags.html">标签</a></li>
+					<li class="active"><a href="http://jitlee.github.io/blog">主页</a></li>
+					<li><a href="http://jitlee.github.io/blog/categories.html">分类</a></li>
+					<li><a href="http://jitlee.github.io/blog/tags.html">标签</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -81,9 +81,9 @@
 				<i class="fa fa-bars"></i>
 			</button>
 			<ul class="dropdown-menu pull-right" role="menu">
-				<li><a href="http://127.0.0.1:4000/"><i class="fa fa-home"></i>主页</a></li>
-				<li><a href="http://127.0.0.1:4000//categories.html"><i class="fa fa-folder"></i>分类</a></li>
-				<li><a href="http://127.0.0.1:4000//tags.html"><i class="fa fa-tags"></i>标签</a></li>
+				<li><a href="http://jitlee.github.io/blog"><i class="fa fa-home"></i>主页</a></li>
+				<li><a href="http://jitlee.github.io/blog/categories.html"><i class="fa fa-folder"></i>分类</a></li>
+				<li><a href="http://jitlee.github.io/blog/tags.html"><i class="fa fa-tags"></i>标签</a></li>
 				<li class="divider"></li>
 				<li><a href="#"><i class="fa fa-arrow-up"></i>返回顶部</a></li>
 			</ul>
@@ -93,11 +93,11 @@
 			<! -- sidebar.html -->
 <header class="sidebar-header" role="banner">
 	<div class="sidebar-header-body">
-		<a href="http://127.0.0.1:4000/">
-			<img src="/jitlee.gif" class="img-circle" />
+		<a href="http://jitlee.github.io/blog">
+			<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle" />
 		</a>
 		<h3>
-	        <a class="title" href="http://127.0.0.1:4000/">Jitlee-Wan</a>
+	        <a class="title" href="http://jitlee.github.io/blog">Jitlee-Wan</a>
 	        <p class="role">如果你简单，这个世界就对你简单</p>
 	    </h3>
 	    <hr class="hr-line"/>
@@ -107,16 +107,16 @@
 	    <hr class="hr-line"/>
 	   <ul class="navgation navgation-primary">
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#post" target="_self">博客</a>
+		       	<a id="btnblog" href="http://jitlee.github.io/blog/#post" onclick="" target="_self">博客</a>
 	      	</li>
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#source" target="_self">项目</a>
+		       	<a href="http://jitlee.github.io/blog/#source" target="_self">项目</a>
 	      	</li>
 	   		<li>
-		       	<a href="http://127.0.0.1:4000//#" target="_self">订阅</a>
+		       	<a href="http://jitlee.github.io/blog/#" target="_self">订阅</a>
 	      	</li>
 	   		<li>
-		       	<a href="/about.html" target="_self">关于</a>
+		       	<a href="http://jitlee.github.io/blog/about.html" target="_self">关于</a>
 	      	</li>
 	    </ul>
 	 	<ul class="navgation navgation-social">
@@ -257,7 +257,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with Canvas</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -267,7 +267,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with HTML5</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -277,7 +277,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with HTML5+</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -287,7 +287,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with Image</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -297,7 +297,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with Javascript</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -307,7 +307,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with js</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
         
       </ul>
     </div>
@@ -317,7 +317,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with this</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
         
       </ul>
     </div>
@@ -327,7 +327,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with 前端</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
         
       </ul>
     </div>
@@ -337,7 +337,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with 指针</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
         
       </ul>
     </div>
@@ -347,7 +347,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with 移动开发</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/html5-image-editor">HTML5图片选剪裁择器</a> <span class="text-muted">- September 22, 2015</span></li>
         
       </ul>
     </div>
@@ -357,7 +357,7 @@
       <h2 style="margin-top: 0px;font-weight:bold;font-family: ubuntu;">Posts tagged  with 面向对象</h2>
       <ul class="list-unstyled">
         
-          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://127.0.0.1:4000//the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
+          <li style="line-height: 35px;"><a style="font-family: 'Raleway', sans-serif; color:#333;font-weight:bold" href="http://jitlee.github.io/blog/the-keywords-in-javascript">JavaScript之关键字this</a> <span class="text-muted">- July 21, 2015</span></li>
         
       </ul>
     </div>
@@ -371,9 +371,10 @@
 			<footer class="navbar navbar-default">
 				<div class="container">
 					<p class="navbar-text pull-left">&copy; 2015 Jitlee.Wan
-						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建， 采用
-						<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术， 感谢talk2ankan提供的
-						<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题。
+						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建
+						采用<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术
+						感谢talk2ankan提供的<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题和 <a class="navbar-button" href="http://duoshuo.com/">多说</a>提供的评论系统
+						最重要的是感谢我最亲爱的老婆<b>zoey</b>
 					</p>
 				</div>
 			</footer>
