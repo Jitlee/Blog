@@ -21,7 +21,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
-				if(window.location.href.replace(/\/$/g, "")=="{{ site.BASE_PATH}}".length) {
+				if(window.location.href.replace(/\/$/g, "")=="{{ site.BASE_PATH}}") {
 					$("#sidebar").css({width:'100%'});
 					$("#btnblog").click(function(){
 						$("#sidebar").animate({width:'33.3333%'},'slow');
