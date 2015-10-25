@@ -10,10 +10,10 @@
 		<!-- Enable responsive viewport -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/syntax/syntax.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/bootstrap/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="/assets/resources/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ site.BASE_PATH}}/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{ site.BASE_PATH}}/assets/resources/syntax/syntax.css">
+		<link rel="stylesheet" type="text/css" href="{{ site.BASE_PATH}}/assets/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ site.BASE_PATH}}/assets/resources/font-awesome/css/font-awesome.min.css">
 		<link rel="icon" href="https://raw.githubusercontent.com/talk2ankan/uno-dbyll/gh-pages/uno-dbyll.png">
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -60,7 +60,7 @@
 				{% endif %}
 
 				<a class="navbar-brand" href="{{ site.BASE_PATH }}">
-					<img src="{{site.author.jitlee}}" class="img-circle img-circle-small"/> {{ site.title }}
+					<img src="{{ site.BASE_PATH}}{{site.author.jitlee}}" class="img-circle img-circle-small"/> {{ site.title }}
 				</a>
 			</div>
 

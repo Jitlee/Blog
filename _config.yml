@@ -15,8 +15,6 @@ categories_path : categories.html
 tags_path : tags.html
 
 BASE_PATH : http://jitlee.github.io/blog
-#http://jitlee.github.io/blog
-
 
 title : Jitlee-Wan
 
