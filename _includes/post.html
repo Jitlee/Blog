@@ -1,0 +1,93 @@
+<div class="page-header">
+	<h1>{{ page.title }} </h1>
+</div>
+
+<article>
+
+	<div class="col-sm-10">
+		<span class="post-date">
+     {{ page.date | date: "%Y" }}年
+     {{ page.date | date: "%m" }}月
+     {{ page.date | date: "%d" }}日
+     {% if page.tagline %}<small style="text-transform:none">{{page.tagline}}</small>{% endif %} {% if post.tagline %}<small>{{post.tagline}}</small>{% endif %}
+   </span>
+		<div class="article_body" id="article_body">
+			{{ content }}
+		</div>
+
+		{% unless page.categories == empty %}
+		<ul class="tag_box list-unstyled list-inline">
+			<li><i class="fa fa-folder-open"></i></li>
+			{% assign categories_list = page.categories %} {% if categories_list.first[0] == null %} {% for category in categories_list %}
+			<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category }}-ref">
+          {{ category | join: "/" }} <span>({{ site.categories[category].size }})</span>
+          {% unless forloop.last %},{% endunless %}
+        </a></li>
+			{% endfor %} {% else %} {% for category in categories_list %}
+			<li><a href="{{ site.BASE_PATH }}/{{ site.categories_path }}#{{ category[0] }}-ref">
+          {{ category[0] | join: "/" }} <span>/{{ category[1].size }})</span>
+        </a></li>
+			{% endfor %} {% endif %}
+		</ul>
+		{% endunless %} {% unless page.tags == empty %}
+		<ul class="list-inline">
+			<li><i class="fa fa-tags"></i></li>
+			{% assign tags_list = page.tags %} {% if tags_list.first[0] == null %} {% for tag in tags_list %}
+			<li>
+				<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag }}-ref">
+          {{ tag }} <span>({{ site.tags[tag].size }})</span>
+          {% unless forloop.last %},{% endunless %}
+          </a>
+			</li>
+			{% endfor %} {% else %} {% for tag in tags_list %}
+			<li>
+				<a href="{{ site.BASE_PATH }}/{{ site.tags_path }}#{{ tag[0] }}-ref">
+            {{ tag[0] }} <span>({{ tag[1].size }})</span>
+            {% unless forloop.last %},{% endunless %}
+          </a>
+			</li>
+
+			{% endfor %} {% endif %} {% assign tags_list = nil %}
+		</ul>
+		{% endunless %}
+
+		<hr>
+
+		<div>
+			<section class="share col-sm-6">
+				<h4 class="section-title">分享</h4>
+				<a class="btn btn-default btn-sm twitter" href="javascript:void(0);">
+					<i class="fa fa-weibo fa-lg"></i> 微博
+				</a>
+				<a class="btn btn-default btn-sm facebook" href="javascript:void(0);">
+					<i class="fa fa-weixin fa-lg"></i> 微信
+				</a>
+			</section>
+
+			<section class="col-sm-6 author">
+				<img src="{{site.author.jitlee}}" style="height:100px;width:100px;" class="img-rounded author-image" />
+				<h4 class="section-title author-name"><b>{{site.title}}</b><br/><p style="color:#888;font-size:13px;">{{site.author.role}}</p></h4>
+				<p class="author-bio">{{site.author.bio}}</p>
+			</section>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<ul class="pager">
+			{% if page.previous %}
+			<li class="previous"><a href="{{ site.BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; 上一篇</a></li>
+			{% else %}
+			<li class="previous disabled"><a>&larr; 上一篇</a></li>
+			{% endif %} {% if page.next %}
+			<li class="next"><a href="{{ site.BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">下一篇 &rarr;</a></li>
+			{% else %}
+			<li class="next disabled"><a>下一篇 &rarr;</a> {% endif %}
+		</ul>
+
+	</div>
+
+	<div id="disqus_thread"></div>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</article>
+<div class="clearfix"></div>

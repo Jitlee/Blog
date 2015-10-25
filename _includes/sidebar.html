@@ -1,0 +1,65 @@
+<! -- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<div class="sidebar-header-body">
+		<a href="{{ site.BASE_PATH }}">
+			<img src="{{site.author.jitlee}}" class="img-circle" />
+		</a>
+		<h3>
+	        <a class="title" href="{{ site.BASE_PATH }}">{{ site.title }}</a>
+	        <p class="role">{{ site.author.role }}</p>
+	    </h3>
+	    <hr class="hr-line"/>
+		<h3>
+	         <p class="bio">{{ site.author.bio }}</p>
+	    </h3>
+	    <hr class="hr-line"/>
+	   <ul class="navgation navgation-primary">
+	   		<li>
+		       	<a href="{{ site.BASE_PATH }}/#post" target="_self">博客</a>
+	      	</li>
+	   		<li>
+		       	<a href="{{ site.BASE_PATH }}/#source" target="_self">项目</a>
+	      	</li>
+	   		<li>
+		       	<a href="{{ site.BASE_PATH }}/#" target="_self">订阅</a>
+	      	</li>
+	   		<li>
+		       	<a href="/about.html" target="_self">关于</a>
+	      	</li>
+	    </ul>
+	 	<ul class="navgation navgation-social">
+	       	{% if site.author.github %}
+	    		<li>
+	    			<a class="github" href="http://github.com/{{ site.author.github }}">
+	    				<i class="fa fa-github"></i>
+	    			</a>
+	    		</li>
+	      	{% endif %}
+	       	{% if site.author.qq %}
+	       	<li>
+		      	<a class="qq" href="http://twitter.com/{{ site.author.qq }}">
+	    				<i class="fa fa-qq"></i>
+		      	</a>
+		    </li>
+	      	{% endif %}
+	       	{% if site.author.weibo %}
+	       	<li>
+		      	<a class="weibo" href="http://twitter.com/{{ site.author.weibo }}">
+	    				<i class="fa fa-weibo"></i>
+		      	</a>
+		    </li>
+	      	{% endif %}
+	      	{% if site.author.email %}
+	      	<li>
+		      	<a class="email" href="mailto:{{ site.author.email }}">
+	    				<i class="fa fa-envelope"></i>
+		      	</a>
+	      	</li>
+	      	{% endif %}
+	   </ul>
+	</div>
+</header>
+
+
+
+<! -- sidebar.html end -->

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ch-cn">
+
+	<head>
+		<title>{{ page.title }}</title>
+		<meta charset="utf-8" /> {% if page.description %}
+		<meta name="description" content="{{ page.description }}"> {% endif %}
+		<meta name="author" content="{{ site.author.name }}">
+
+		<!-- Enable responsive viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/assets/resources/syntax/syntax.css">
+		<link rel="stylesheet" type="text/css" href="/assets/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/assets/resources/font-awesome/css/font-awesome.min.css">
+		<link rel="icon" href="https://raw.githubusercontent.com/talk2ankan/uno-dbyll/gh-pages/uno-dbyll.png">
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				if(window.location.href=="{{ site.BASE_PATH}}") {
+					$("#sidebar").css({width:'100%'});
+					$("#btnblog").click(function(){
+						$("#sidebar").animate({width:'33.3333%'},'slow');
+					});
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default visible-xs" role="navigation">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarHeaderCollapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				{% if site.author.github %}
+				<a type="button" class="navbar-toggle nav-link" href="http://github.com/{{ site.author.github }}">
+					<i class="fa fa-github"></i>
+				</a>
+				{% endif %} {% if site.author.qq %}
+				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/{{ site.author.qq }}">
+					<i class="fa fa-qq"></i>
+				</a>
+				{% endif %} {% if site.author.weibo %}
+				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/{{ site.author.weibo }}">
+					<i class="fa fa-weibo"></i>
+				</a>
+				{% endif %} {% if site.author.email %}
+				<a type="button" class="navbar-toggle nav-link" href="mailto:{{ site.author.email }}">
+					<i class="fa fa-envelope"></i>
+				</a>
+				{% endif %}
+
+				<a class="navbar-brand" href="{{ site.BASE_PATH }}">
+					<img src="{{site.author.jitlee}}" class="img-circle img-circle-small"/> {{ site.title }}
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="navbarHeaderCollapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="{% if BASE_PATH %}{{ site.BASE_PATH }}{% else %}{{ site.BASE_PATH}}{% endif %}">主页</a></li>
+					<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}">分类</a></li>
+					<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}">标签</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+
+		</nav>
+
+		<!-- nav-menu-dropdown -->
+		<div class="btn-group hidden-xs" id="nav-menu">
+			<button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
+				<i class="fa fa-bars"></i>
+			</button>
+			<ul class="dropdown-menu pull-right" role="menu">
+				<li><a href="{% if BASE_PATH %}{{ site.BASE_PATH }}{% else %}{{ site.BASE_PATH}}{% endif %}"><i class="fa fa-home"></i>主页</a></li>
+				<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}"><i class="fa fa-folder"></i>分类</a></li>
+				<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}"><i class="fa fa-tags"></i>标签</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><i class="fa fa-arrow-up"></i>返回顶部</a></li>
+			</ul>
+		</div>
+
+		<div class="col-sm-4 sidebar hidden-xs" id="sidebar">
+			{% include sidebar.html %}
+		</div>
+
+		<div class="col-sm-8 col-sm-offset-4" id="container">
+			{{ content }}
+
+			<footer class="navbar navbar-default">
+				<div class="container">
+					<p class="navbar-text pull-left">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
+						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建， 采用
+						<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术， 感谢talk2ankan提供的
+						<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题。
+					</p>
+				</div>
+			</footer>
+		</div>
+	</body>
+
+</html>

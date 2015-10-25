@@ -1,0 +1,171 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:500&subset=latin,latin-ext);
+
+body{
+  overflow-X:hidden; 
+}
+
+#nav-menu{
+    position: fixed;
+    top: 45px;
+    right: 45px;
+    z-index: 4;
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: 'Ubuntu', sans-serif; }
+
+.navbar-brand{
+
+	margin-bottom: 15px;
+}
+
+
+.author .author-image {
+  float: left;
+  margin-right: 20px;
+}
+
+.author-bio{
+font-family: 'Raleway', sans-serif;
+}
+
+.author-name{
+	font-family: 'Raleway', sans-serif;
+}
+
+.page-header {
+	color: #e74c3c;
+	text-shadow: 1px 1px 1px rgba(150, 150, 150, 1);
+	padding: 0 5% 0;
+	font-family: ubuntu;
+}
+
+
+a.nav-link {
+	padding-bottom: 5px;
+	padding-top: 7px;
+	color: #aaa;
+}
+a.nav-link i{
+	font-size: 16px;
+}
+a.nav-link:hover { color: #777 }
+
+
+article {
+	padding: 0 5% 0;
+	margin-bottom: 40px;
+}
+
+.article_body{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#article_body{
+	font-family: 'Raleway', sans-serif;
+	font-size: large;
+}
+
+.post-date {
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 3px;
+}
+
+
+
+footer {
+  padding-top: 15px;
+  font-family: 'Ubuntu';
+}
+
+#sidebar {
+	position: fixed;
+	height: 100%;
+	background-image:url("/assets/media/background-cover.png"),url("/assets/media/background.jpg");	
+	background-size: cover;
+	background-position: 50% 5%;
+	color: #fff;
+	z-index: 5;
+	display:table;
+}
+
+.sidebar-header {
+	display:table-cell;
+	text-align: center;
+	padding:0px 60px;
+	vertical-align: middle;
+}
+
+.sidebar-header a {
+	text-decoration: none;
+	font-family: 'PT Serif', georgia, serif;
+}
+
+.sidebar-header .title{
+	letter-spacing: 4px;
+	color:#fff;
+	line-height: 1.5;
+	font-size:4vmin;
+}
+
+.sidebar-header .role,.sidebar-header .bio {
+	letter-spacing: 4px;
+	color:#fff;
+	line-height: 1.5;
+	font-size:2vmin;
+	opacity: 0.8;
+}
+
+#container{
+	overflow-x:hidden;
+	z-index: 3;
+}
+
+.img-circle {
+	border-radius: 50%;
+	border: 3px solid #FFF;
+	height:75px;
+	width:75px
+}
+
+.hr-line {
+	height: 1px;
+	border:none;
+	width: 40%;
+	background-color: rgba(255,255,255,0.50);
+}
+
+ul.navgation {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	opacity: 0.8;
+}
+
+ul.navgation li {
+	display:inline-block;
+	margin:5px 1px 0 0;
+	line-height:1em;
+}
+
+ul.navgation.navgation-primary a{
+	display:inline-block;
+	border-radius: 20px;
+	border-color:#fff;
+	border-style: solid;
+	border-width: 1px;
+	color:#fff;
+	font-size:14px;
+	padding:13px 20px;
+}
+
+ul.navgation.navgation-social a{
+	display:inline-block;
+	margin:6px 8px 6px 9px;
+}
+
+ul.navgation.navgation-social a i{
+	font-size:22px;
+	color:#fff;
+}
