@@ -3,7 +3,7 @@
 
 	<head>
 		<title>Jitlee-Wan ｜ 个人技术博客</title>
-		<meta charset="utf-8" /> 
+		<meta charset="utf-8" />
 		<meta name="author" content="Jitlee.Wan">
 
 		<!-- Enable responsive viewport -->
@@ -19,11 +19,15 @@
 		<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.js"></script>
 
 		<script type="text/javascript">
-			$(document).ready(function(){
-				if(window.location.href=="http://127.0.0.1:4000/") {
-					$("#sidebar").css({width:'100%'});
-					$("#btnblog").click(function(){
-						$("#sidebar").animate({width:'33.3333%'},'slow');
+			$(document).ready(function() {
+				if (window.location.href == "http://127.0.0.1:4000/") {
+					$("#sidebar").css({
+						width: '100%'
+					});
+					$("#btnblog").click(function() {
+						$("#sidebar").animate({
+							width: '33.3333%'
+						}, 'slow');
 					});
 				}
 			});
@@ -40,26 +44,25 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				
+
 				<a type="button" class="navbar-toggle nav-link" href="http://github.com/jitlee">
 					<i class="fa fa-github"></i>
 				</a>
-				 
+
 				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/www.wpj@163.com">
 					<i class="fa fa-qq"></i>
 				</a>
-				 
+
 				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/jitlee">
 					<i class="fa fa-weibo"></i>
 				</a>
-				 
+
 				<a type="button" class="navbar-toggle nav-link" href="mailto:www.wpj@163.com">
 					<i class="fa fa-envelope"></i>
 				</a>
-				
 
 				<a class="navbar-brand" href="http://127.0.0.1:4000/">
-					<img src="/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
+					<img src="/jitlee.gif" class="img-circle img-circle-small" /> Jitlee-Wan
 				</a>
 			</div>
 
@@ -91,80 +94,74 @@
 
 		<div class="col-sm-4 sidebar hidden-xs" id="sidebar">
 			<! -- sidebar.html -->
-<header class="sidebar-header" role="banner">
-	<div class="sidebar-header-body">
-		<a href="http://127.0.0.1:4000/">
-			<img src="/jitlee.gif" class="img-circle" />
-		</a>
-		<h3>
+			<header class="sidebar-header" role="banner">
+				<div class="sidebar-header-body">
+					<a href="http://127.0.0.1:4000/">
+						<img src="/jitlee.gif" class="img-circle" />
+					</a>
+					<h3>
 	        <a class="title" href="http://127.0.0.1:4000/">Jitlee-Wan</a>
 	        <p class="role">如果你简单，这个世界就对你简单</p>
 	    </h3>
-	    <hr class="hr-line"/>
-		<h3>
+					<hr class="hr-line" />
+					<h3>
 	         <p class="bio">嗨，我是万佳，一名来自深圳的js/swift开发狗，现在就职与一家互联网创业公司。</p>
 	    </h3>
-	    <hr class="hr-line"/>
-	   <ul class="navgation navgation-primary">
-	   		<li>
-		       	<a href="http://127.0.0.1:4000//#post" target="_self">博客</a>
-	      	</li>
-	   		<li>
-		       	<a href="http://127.0.0.1:4000//#source" target="_self">项目</a>
-	      	</li>
-	   		<li>
-		       	<a href="http://127.0.0.1:4000//#" target="_self">订阅</a>
-	      	</li>
-	   		<li>
-		       	<a href="/about.html" target="_self">关于</a>
-	      	</li>
-	    </ul>
-	 	<ul class="navgation navgation-social">
-	       	
-	    		<li>
-	    			<a class="github" href="http://github.com/jitlee">
-	    				<i class="fa fa-github"></i>
-	    			</a>
-	    		</li>
-	      	
-	       	
-	       	<li>
-		      	<a class="qq" href="http://twitter.com/www.wpj@163.com">
-	    				<i class="fa fa-qq"></i>
-		      	</a>
-		    </li>
-	      	
-	       	
-	       	<li>
-		      	<a class="weibo" href="http://twitter.com/jitlee">
-	    				<i class="fa fa-weibo"></i>
-		      	</a>
-		    </li>
-	      	
-	      	
-	      	<li>
-		      	<a class="email" href="mailto:www.wpj@163.com">
-	    				<i class="fa fa-envelope"></i>
-		      	</a>
-	      	</li>
-	      	
-	   </ul>
-	</div>
-</header>
+					<hr class="hr-line" />
+					<ul class="navgation navgation-primary">
+						<li>
+							<a href="http://127.0.0.1:4000//#post" target="_self">博客</a>
+						</li>
+						<li>
+							<a href="http://127.0.0.1:4000//#source" target="_self">项目</a>
+						</li>
+						<li>
+							<a href="http://127.0.0.1:4000//#" target="_self">订阅</a>
+						</li>
+						<li>
+							<a href="/about.html" target="_self">关于</a>
+						</li>
+					</ul>
+					<ul class="navgation navgation-social">
 
+						<li>
+							<a class="github" href="http://github.com/jitlee">
+								<i class="fa fa-github"></i>
+							</a>
+						</li>
 
+						<li>
+							<a class="qq" href="http://twitter.com/www.wpj@163.com">
+								<i class="fa fa-qq"></i>
+							</a>
+						</li>
 
-<! -- sidebar.html end -->
+						<li>
+							<a class="weibo" href="http://twitter.com/jitlee">
+								<i class="fa fa-weibo"></i>
+							</a>
+						</li>
+
+						<li>
+							<a class="email" href="mailto:www.wpj@163.com">
+								<i class="fa fa-envelope"></i>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</header>
+
+			<! -- sidebar.html end -->
 
 		</div>
 
 		<div class="col-sm-8 col-sm-offset-4" id="container">
 			<br/>
 
+			<article class="home">
 
-<article class="home">
-
-  <h2>
+				<h2>
  <p class="post-date">
      2015年
      09月
@@ -173,20 +170,17 @@
     <a href="http://127.0.0.1:4000//html5-image-editor" style="font-family: ubuntu">HTML5图片选剪裁择器</a>
   </h2>
 
-  <div style="font-family: 'Raleway', sans-serif;font-size:large">
-    
-    
-    给大家介绍一款基于HTML5+开发的一个头像剪裁组件
-    
-    
-    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
-  </div>
-</article>
+				<div style="font-family: 'Raleway', sans-serif;font-size:large">
 
+					给大家介绍一款基于HTML5+开发的一个头像剪裁组件
 
-<article class="home">
+					<hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
+				</div>
+			</article>
 
-  <h2>
+			<article class="home">
+
+				<h2>
  <p class="post-date">
      2015年
      07月
@@ -195,44 +189,36 @@
     <a href="http://127.0.0.1:4000//the-keywords-in-javascript" style="font-family: ubuntu">JavaScript之关键字this</a>
   </h2>
 
-  <div style="font-family: 'Raleway', sans-serif;font-size:large">
-    
-    
-    Javascript作为因特网上最流行的脚本语言，很容易使用，你一定会喜欢它。各种强大的js库，都离不开它都基本语法。本文，为将给大家介绍Javascript中无处不在的this对象的用法。
-    
-    
-    <hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
-  </div>
-</article>
+				<div style="font-family: 'Raleway', sans-serif;font-size:large">
 
-<hr/>
+					Javascript作为因特网上最流行的脚本语言，很容易使用，你一定会喜欢它。各种强大的js库，都离不开它都基本语法。本文，为将给大家介绍Javascript中无处不在的this对象的用法。
 
-<ul class="pager"> 
+					<hr class="hr-line1 " style="background-color:#D8D8D8;width:25%;" align="left">
+				</div>
+			</article>
 
-  
-  <li class="previous disabled">
-    <a>&larr; 下一页</a>
-  </li>
-  
-  
-  <li>
-    <span class="page_number">第 1 页，共 1 页</span>
-  </li>
+			<hr/>
 
-  
-  <li class="next disabled">
-    <a>下一页 &rarr;</a>        
-  </li>
-  
+			<ul class="pager">
 
-</ul>
+				<li class="previous disabled">
+					<a>&larr; 下一页</a>
+				</li>
 
+				<li>
+					<span class="page_number">第 1 页，共 1 页</span>
+				</li>
+
+				<li class="next disabled">
+					<a>下一页 &rarr;</a>
+				</li>
+
+			</ul>
 
 			<footer class="navbar navbar-default">
 				<div class="container">
-					<p class="navbar-text pull-left">&copy; 2015 Jitlee.Wan
-						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建， 采用
-						<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术， 感谢talk2ankan提供的
+					<p class="navbar-text pull-left">&copy; 2015 Jitlee.Wan 基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建 采用
+						<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术 感谢talk2ankan提供的
 						<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题。
 					</p>
 				</div>
