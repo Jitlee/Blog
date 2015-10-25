@@ -71,7 +71,7 @@ header {
 #sidebar {
 	position: fixed;
 	height: 100%;
-	background-image: url("/assets/media/background-cover.png"), url("/assets/media/background.jpg");
+	background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background.jpg");
 	background-size: cover;
 	background-position: 50% 5%;
 	color: #fff;
