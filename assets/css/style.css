@@ -93,7 +93,7 @@ header {
 
 @media only screen and (min-width: 1024px) {
 	#sidebar {
-		background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background@3x.jpg");
+		background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background@2x.jpg");
 	}
 }
 
