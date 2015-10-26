@@ -30,7 +30,7 @@ tags: [Oracle Spitail,SDO_WITHIN_DISTANCE,GIS]
 
 CREATE OR REPLACE FUNCTION F_GET_LOCATION(lon NUMBER, lat NUMBER)
   RETURN VARCHAR2 IS
-  -- 作者：万品佳
+  -- 作者：万佳
   -- 时间：2014-10-17
   -- 描述：根据经纬度获取结构化地址
   -- 返回值格式：省-市-区-街-门牌号
