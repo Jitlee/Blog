@@ -264,7 +264,8 @@ Monitor.Geometry = Monitor.Class({
 由于项目用到的图形控件多达几十种，无法一一列出，我抽取其中一种来处来展示
 
 效果图如下：
-<img src="{{ site.BASE_PATH }}{{page.geometry}}" width="85%"/>
+
+<img src="{{ site.BASE_PATH }}{{page.geometry}}" width="256px"/>
 
 
 {% highlight javascript %}
