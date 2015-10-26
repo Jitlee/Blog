@@ -3,7 +3,7 @@ layout: post
 title: HTML5图片选剪裁择器
 description: 给大家介绍一款基于HTML5+开发的一个头像剪裁组件
 categories: [html5]
-image: /assets/media/imageedtior.png
+image: /assets/media/imageeditor.png
 tags: [HTML5,HTML5+,Javascript,Canvas,Image,移动开发]
 ---
 
