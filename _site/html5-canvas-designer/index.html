@@ -179,22 +179,19 @@
 现在说要做HTML5版的，没办法继续折腾吧！</p>
 </blockquote>
 
-<p>[demo] (http://jitlee.github.io/demo/monitor.html)</p>
-
 <p><em>由于商业原因，本文演示的DEMO和功能并不包含全部的项目内容</em></p>
 
 <p><em>本文的设计思想是完全仿照<a href="http://openlayers.org/two/">OpenLayer2.0</a>，如有不当之处，敬请批评指正</em></p>
 
-<h3 id="javascript">1.实现Javascript的面向对象功能</h3>
+<p><a href="http://jitlee.github.io/demo/monitor.html">demo</a></p>
 
-<p>我的底层代码依然使用OpenLayers的，分别用到了：
-- OpenLayers.BaseTypes.js
-- OpenLayers.Class.js
-- OpenLayers.Element.js
-- OpenLayers.Util.js
-- OpenLayers.Monitor.js
-- OpenLayers.Handler.js
-- OpenLayers.Handler.Drag.js</p>
+<p>效果图：</p>
+
+<p><img src="http://jitlee.github.io/blog/assets/media/canvas_design.jpg" width="85%" /></p>
+
+<hr />
+
+<h3 id="javascript">1.实现Javascript的面向对象功能</h3>
 
 <p>下面两段代码分别实现了类(Class)和继承(inherit)：</p>
 
@@ -232,21 +229,261 @@
 
 <h3 id="map">2.创建Map对象</h3>
 
-<p>Map.js在OpenLayers中，原本是地图容器。由于我要打造设计器并不是地图，
-所以不需要做那么复杂的地理信息处理。除了以上代码大部分采用OpenLayers原封代码外，
-以下代码都是简单的设计下。</p>
+<p>设计器的最大容器, 装载所有的图层、控件、和图形</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Map</span> <span class="o">=</span> <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
+	<span class="nx">div</span><span class="o">:</span><span class="kc">null</span><span class="p">,</span> <span class="c1">// DIV</span>
+	
+	<span class="nx">viewportDiv</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// 可是范围DIV</span>
+	
+	<span class="nx">layers</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// 所有图层</span>
+	
+	<span class="nx">controls</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// 所有控件</span>
+	
+	<span class="nx">options</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// 配置参数</span>
+	
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">div</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 构造函数</span>
+	
+	<span class="nx">addLayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">layer</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 添加图层</span>
+	
+	<span class="nx">removeLayer</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">layer</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 移除图层</span>
+	
+	<span class="nx">addControl</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">control</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 添加控件</span>
+	
+	<span class="nx">ClASS_NAME</span><span class="o">:</span> <span class="s2">&quot;Monitor.Map&quot;</span>
+<span class="p">});</span></code></pre></div>
 
 <h3 id="section">3.创建图层基类和矢量图层类</h3>
 
 <p>矢量图层实际是一张画布，一个设计器需要多层画布。类似与PS中的层的概念。</p>
 
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Layer</span><span class="p">.</span><span class="nx">Vector</span> <span class="o">=</span> <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">(</span><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Layer</span><span class="p">,</span> <span class="p">{</span>
+
+	<span class="nx">options</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>			
+	
+	<span class="nx">renderer</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>			<span class="c1">// 图形渲染器</span>
+	
+	<span class="nx">map</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>					
+	
+	<span class="nx">features</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>			<span class="c1">// 所有要素</span>
+	
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 构造函数</span>
+	
+	<span class="nx">setMap</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">map</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 设置map对象</span>
+	
+	<span class="nx">addFeatures</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">features</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 添加要素并且渲染</span>
+	
+	<span class="nx">removeFeatures</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">features</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 移除要素</span>
+	
+	<span class="nx">getFeatureFromXY</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>  <span class="c1">// 鼠标探测要素信息</span>
+	
+	<span class="nx">redraw</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="c1">// 重绘</span>
+	
+	<span class="nx">ClASS_NAME</span><span class="o">:</span> <span class="s2">&quot;Monitor.Layer.Vector&quot;</span>
+<span class="p">});</span></code></pre></div>
+
 <h3 id="section-1">4.创建修改控件类</h3>
 
-<p>使用Drag.js实现对控件的移动和缩放功能</p>
+<p>实现对控件的移动和缩放功能</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Control</span><span class="p">.</span><span class="nx">ModifyFeature</span> <span class="o">=</span>  <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">(</span><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Control</span><span class="p">,</span> <span class="p">{</span>
+	
+	<span class="nx">layer</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> 						<span class="c1">// 临时图层</span>
+	
+	<span class="nx">layers</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>						<span class="c1">// 能够编辑的图层数组</span>
+	
+	<span class="nx">selectedFeature</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>	<span class="c1">// 当前选择的要素</span>
+	
+	<span class="nx">selectedFeatures</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>	<span class="c1">// 当前选中的要素数组</span>
+	
+	<span class="nx">locked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>					<span class="c1">// 是否锁定</span>
+	
+	<span class="nx">knobSize</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>						<span class="c1">// 编辑图形的手柄大小，单位px</span>
+	
+	<span class="nx">resizeFeature</span><span class="o">:</span><span class="kc">null</span><span class="p">,</span>			<span class="c1">// 当前缩放的要素对象</span>
+	
+	<span class="nx">events</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>						<span class="c1">// 消息总线</span>
+	
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">layers</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">// 构造函数</span>
+	
+	<span class="nx">dragstart</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>		<span class="c1">// 开始拖动</span>
+	
+	<span class="nx">dragmove</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>		<span class="c1">// 拖动</span>
+	
+	<span class="nx">dragend</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>			<span class="c1">// 拖动结束</span>
+	
+	<span class="nx">moveFeatures</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">//  移动控件</span>
+	
+	<span class="nx">resizeFeatures</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xy</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">// 缩放控件</span>
+	
+	<span class="nx">select</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="p">{},</span>			<span class="c1">// 高亮要素</span>
+	
+	<span class="nx">unselect</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="p">{},</span>		<span class="c1">// 反高亮要素</span>
+	
+	<span class="nx">unselectAll</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">exceptFeature</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 取消所有高亮</span>
+	
+	<span class="nx">activate</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>	<span class="c1">// 激活</span>
+	
+	<span class="nx">deactivate</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>	<span class="c1">// 反激活</span>
+	
+	<span class="nx">CLASS_NAME</span><span class="o">:</span> <span class="s2">&quot;Monitor.Control.ModifyFeature&quot;</span>
+	
+<span class="p">});</span></code></pre></div>
 
 <h3 id="renderer">5.创建Renderer类</h3>
 
-<p>OpenLayers原本</p>
+<p>图形渲染类，使用Canvas渲染作为核心渲染器，以后可以扩展到SVG，甚至VML。
+由于设计过于匆忙，还未来得及实现绘制接口，实际项目中，是直接调用Canvas的接口。</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Renderer</span> <span class="o">=</span> <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
+
+	<span class="nx">layer</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>		<span class="c1">// 所在矢量图层</span>
+	
+	<span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>		<span class="c1">// 画布</span>
+	
+	<span class="nx">context</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>	<span class="c1">// 画布上下文</span>
+	
+	<span class="nx">matrix</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>		<span class="c1">// 变换矩阵</span>
+	
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">layer</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 构造函数</span>
+	
+	<span class="nx">updateSize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>	<span class="c1">// 重绘 </span>
+	
+	<span class="nx">setOrigin</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 设置原点</span>
+	
+	<span class="nx">setStyle</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pen</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">// 设置画笔、填充和字体样式等</span>
+	
+	<span class="nx">setTransform</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">matrix</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 设置矩阵变换</span>
+	
+	<span class="nx">eraseFeatures</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">features</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 擦除要素</span>
+	
+	<span class="nx">erase</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>	<span class="c1">// 擦除全部</span>
+	
+	<span class="nx">clear</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 擦除指定区域</span>
+	
+	<span class="nx">drawRectangle</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pen</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 绘制矩形</span>
+	
+	<span class="nx">drawLine</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pen</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 绘制</span>
+	
+	<span class="nx">drawCircle</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pen</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 绘制正圆</span>
+	
+	<span class="nx">drawText</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pen</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">alginX</span><span class="p">,</span> <span class="nx">alginY</span><span class="p">,</span> <span class="nx">matrix</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 绘制文本</span>
+	
+	<span class="nx">CLASS_NAME</span><span class="o">:</span> <span class="s2">&quot;Monitor.Renderer&quot;</span>
+	
+<span class="p">});</span></code></pre></div>
+
+<h3 id="geometry">6.创建Geometry基类</h3>
+
+<p>Geometry即为我们刚刚创建设计器需要设计的对象了</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Geometry</span> <span class="o">=</span> <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
+	<span class="nx">id</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	<span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>	<span class="c1">// 基本属性：宽度</span>
+	<span class="nx">height</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span> <span class="c1">// 基本属性：高度</span>
+	<span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 	<span class="c1">// 基本属性：x</span>
+	<span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 	<span class="c1">// 基本属性：y</span>
+	<span class="nx">backgroundColor</span><span class="o">:</span> <span class="s2">&quot;#fff&quot;</span><span class="p">,</span>	<span class="c1">// 基本属性：背景色</span>
+	<span class="nx">foregroundColor</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span><span class="p">,</span> 	<span class="c1">// 基本属性：字体色</span>
+	<span class="nx">minWidth</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>		<span class="c1">// 基本属性：最小宽度</span>
+	<span class="nx">minHeight</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span>		<span class="c1">// 基本属性：最大宽度</span>
+	<span class="nx">bounds</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>		<span class="c1">// 边界</span>
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 构造函数</span>
+	
+	<span class="nx">draw</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 绘制</span>
+	
+	<span class="nx">isPointInRange</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{},</span> <span class="c1">// 点是否在范围内</span>
+	
+	<span class="nx">move</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">// 移动</span>
+	
+	<span class="nx">resize</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">)</span> <span class="p">{},</span>	<span class="c1">// 缩放</span>
+	
+	<span class="nx">getBounds</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>	<span class="c1">// 获取边界</span>
+	
+	<span class="nx">CLASS_NAME</span><span class="o">:</span> <span class="s2">&quot;Monitor.Geometry&quot;</span>
+<span class="p">});</span></code></pre></div>
+
+<h3 id="section-2">7.扩展图形类</h3>
+
+<p>由于项目用到的图形控件多达几十种，无法一一列出，我抽取其中一种来处来展示</p>
+
+<p>效果图如下：
+<img src="http://jitlee.github.io/blog/assets/media/canvas_design.jpg" width="85%" /></p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">DLBiaoPan</span> <span class="o">=</span> <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span><span class="p">(</span><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">,</span> <span class="p">{</span>
+	<span class="nx">min</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="nx">max</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+	<span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+	<span class="nx">backgroundColor</span><span class="o">:</span> <span class="s2">&quot;#ddd&quot;</span><span class="p">,</span>
+	<span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;仪表&quot;</span><span class="p">,</span>
+	
+	<span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Monitor</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+	<span class="p">},</span>
+	
+	<span class="nx">draw</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">Monitor</span><span class="p">.</span><span class="nx">Geometry</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">draw</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawRectangle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="p">},</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nx">w</span><span class="p">,</span><span class="nx">h</span><span class="p">);</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">({</span> <span class="nx">stroke</span><span class="o">:</span> <span class="s2">&quot;#eee&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nx">w</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">({</span> <span class="nx">stroke</span><span class="o">:</span> <span class="s2">&quot;#eee&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nx">h</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">({</span> <span class="nx">stroke</span><span class="o">:</span> <span class="s2">&quot;#aaa&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span><span class="nx">w</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nx">w</span><span class="p">,</span><span class="nx">h</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">({</span> <span class="nx">stroke</span><span class="o">:</span> <span class="s2">&quot;#aaa&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">3</span> <span class="p">},</span><span class="mi">0</span><span class="p">,</span><span class="nx">h</span><span class="p">,</span><span class="nx">w</span><span class="p">,</span><span class="nx">h</span><span class="p">);</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#bbb&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0.02</span><span class="o">*</span><span class="nx">w</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.08</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.08</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.03</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#bbb&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0.02</span><span class="o">*</span><span class="nx">w</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.92</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.08</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.03</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#bbb&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0.02</span><span class="o">*</span><span class="nx">w</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.08</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.92</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.03</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#bbb&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0.02</span><span class="o">*</span><span class="nx">w</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.92</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.92</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.03</span><span class="p">);</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#274e13&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.41</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#fff&quot;</span><span class="p">,</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.38</span><span class="p">);</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawCircle</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span> <span class="s2">&quot;#333&quot;</span> <span class="p">},</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.02</span><span class="p">);</span>
+		
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawText</span><span class="p">({</span> <span class="nx">fill</span><span class="o">:</span><span class="k">this</span><span class="p">.</span><span class="nx">foregroundColor</span><span class="p">,</span> <span class="nx">font</span><span class="o">:</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.08</span><span class="o">+</span> <span class="s2">&quot;px 宋体&quot;</span> <span class="p">},</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">h</span> <span class="o">*</span> <span class="mf">0.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+		
+		<span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="mf">0.75</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">degree</span><span class="p">,</span> <span class="nx">preDegree</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">stroke</span><span class="o">:</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0.008</span><span class="o">*</span><span class="nx">w</span> <span class="p">};</span>
+		<span class="kd">var</span> <span class="nx">cos</span><span class="p">,</span><span class="nx">sin</span><span class="p">;</span>
+		<span class="p">{</span>
+			<span class="nx">preDegree</span> <span class="o">=</span> <span class="mf">1.5</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">;</span>
+			<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">degree</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">preDegree</span> <span class="o">*</span> <span class="nx">i</span><span class="p">;</span>
+				<span class="nx">sin</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+				<span class="nx">cos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+				<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">(</span><span class="nx">style</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.32</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.32</span><span class="o">*</span><span class="nx">sin</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.36</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.36</span><span class="o">*</span><span class="nx">sin</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">textStyle</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">fill</span><span class="o">:</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span> <span class="nx">font</span><span class="o">:</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.05</span><span class="o">+</span> <span class="s2">&quot;px 宋体&quot;</span> <span class="p">};</span>
+			<span class="nx">preDegree</span> <span class="o">=</span> <span class="mf">1.5</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">;</span>
+			<span class="kd">var</span> <span class="nx">perValue</span> <span class="o">=</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">max</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">min</span><span class="p">)</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">;</span>
+			<span class="nx">style</span><span class="p">.</span><span class="nx">strokeThickness</span> <span class="o">=</span> <span class="mf">0.01</span><span class="o">*</span><span class="nx">w</span><span class="p">;</span>
+			<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">11</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">degree</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="nx">preDegree</span> <span class="o">*</span> <span class="nx">i</span><span class="p">;</span>
+				<span class="nx">sin</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+				<span class="nx">cos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+				<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">(</span><span class="nx">style</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.32</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.32</span><span class="o">*</span><span class="nx">sin</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.36</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.36</span><span class="o">*</span><span class="nx">sin</span><span class="p">);</span>
+				<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawText</span><span class="p">(</span><span class="nx">textStyle</span><span class="p">,</span> <span class="nx">i</span> <span class="o">*</span> <span class="nx">perValue</span><span class="p">,</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.24</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span> <span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.24</span><span class="o">*</span><span class="nx">sin</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		
+		<span class="nx">style</span><span class="p">.</span><span class="nx">stroke</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span><span class="p">;</span>
+		<span class="nx">style</span><span class="p">.</span><span class="nx">strokeThickness</span> <span class="o">=</span> <span class="mf">0.02</span><span class="o">*</span><span class="nx">w</span><span class="p">;</span>
+		<span class="nx">degree</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="mf">1.5</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">/</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">max</span> <span class="o">-</span> <span class="k">this</span><span class="p">.</span><span class="nx">min</span><span class="p">);</span>
+		<span class="nx">sin</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+		<span class="nx">cos</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">degree</span><span class="p">);</span>
+		<span class="nx">renderer</span><span class="p">.</span><span class="nx">drawLine</span><span class="p">(</span><span class="nx">style</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span><span class="nx">w</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="nx">w</span><span class="o">*</span><span class="mf">0.30</span><span class="o">*</span><span class="nx">cos</span><span class="p">,</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.5</span><span class="o">+</span><span class="nx">h</span><span class="o">*</span><span class="mf">0.30</span><span class="o">*</span><span class="nx">sin</span><span class="p">);</span>
+		
+		<span class="k">this</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">();</span>
+	<span class="p">},</span>
+	
+	<span class="nx">CLASS_NAME</span><span class="o">:</span> <span class="s2">&quot;DLBiaoPan&quot;</span>
+<span class="p">});</span></code></pre></div>
 
 
 		</div>
