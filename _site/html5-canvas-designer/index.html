@@ -2,9 +2,9 @@
 <html lang="ch-cn">
 
 	<head>
-		<title>HTML5图片选剪裁择器</title>
+		<title>HTML5之基于Canvas打造2D设计器</title>
 		<meta charset="utf-8" /> 
-		<meta name="description" content="给大家介绍一款基于HTML5+开发的一个头像剪裁组件"> 
+		<meta name="description" content="使用Canvas的最基本功能，创建复杂的控件和完美的设计器。基于Javascript面向对象的设计，提升框架的可扩展性、易用性"> 
 		<meta name="author" content="Jitlee.Wan">
 
 		<!-- Enable responsive viewport -->
@@ -161,7 +161,7 @@
 
 		<div class="col-sm-8 col-sm-offset-4" id="container">
 			<div class="page-header">
-	<h1>HTML5图片选剪裁择器 </h1>
+	<h1>HTML5之基于Canvas打造2D设计器 </h1>
 </div>
 
 <article>
@@ -169,22 +169,85 @@
 	<div class="col-sm-10">
 		<span class="post-date">
      2015年
-     09月
-     22日
+     10月
+     15日
       
    </span>
 		<div class="article_body" id="article_body">
 			<blockquote>
-  <h4 id="br">功能介绍：<br /></h4>
-  <p>1.支持HTML5,HTML5+使用<br />
-2.支持图片不失真处理<br />
-3.支持自输出图像自定义大小<br />
-4.支持剪裁框自定义大小<br />
-5.支持自动按照图像的EXIF的方位属性旋转<br />
-6.支持图像移动、缩放和旋转等操作<br /></p>
+  <p>前几年帮一朋友把一款Winform的程序，做成Silverlight版，再后来又改造成WPF版的。
+现在说要做HTML5版的，没办法继续折腾吧！</p>
 </blockquote>
 
-<p>未完待续。。。</p>
+<p>[demo] (http://jitlee.github.io/demo/monitor.html)</p>
+
+<p><em>由于商业原因，本文演示的DEMO和功能并不包含全部的项目内容</em></p>
+
+<p><em>本文的设计思想是完全仿照<a href="http://openlayers.org/two/">OpenLayer2.0</a>，如有不当之处，敬请批评指正</em></p>
+
+<h3 id="javascript">1.实现Javascript的面向对象功能</h3>
+
+<p>我的底层代码依然使用OpenLayers的，分别用到了：
+- OpenLayers.BaseTypes.js
+- OpenLayers.Class.js
+- OpenLayers.Element.js
+- OpenLayers.Util.js
+- OpenLayers.Monitor.js
+- OpenLayers.Handler.js
+- OpenLayers.Handler.Drag.js</p>
+
+<p>下面两段代码分别实现了类(Class)和继承(inherit)：</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">Monitor</span><span class="p">.</span><span class="nx">Class</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">P</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">len</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+    <span class="kd">var</span> <span class="nx">C</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">F</span><span class="p">.</span><span class="nx">init</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span> <span class="o">?</span>
+        <span class="nx">F</span><span class="p">.</span><span class="nx">init</span> <span class="o">:</span>
+        <span class="kd">function</span><span class="p">(){</span> <span class="nx">P</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span> <span class="p">};</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">len</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newArgs</span> <span class="o">=</span> <span class="p">[</span><span class="nx">C</span><span class="p">,</span> <span class="nx">P</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span>
+                <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">len</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="nx">F</span><span class="p">);</span>
+        <span class="nx">Monitor</span><span class="p">.</span><span class="nx">inherit</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">newArgs</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">C</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">F</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">C</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Monitor</span><span class="p">.</span><span class="nx">inherit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">C</span><span class="p">,</span> <span class="nx">P</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>
+	<span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">P</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	<span class="nx">C</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">l</span><span class="p">,</span> <span class="nx">o</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nx">l</span><span class="o">=</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">o</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+	    <span class="k">if</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">o</span> <span class="o">===</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span> <span class="p">{</span>
+	    		<span class="nx">o</span> <span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+	    <span class="p">}</span>
+	    <span class="nx">Monitor</span><span class="p">.</span><span class="nx">Util</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">o</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="map">2.创建Map对象</h3>
+
+<p>Map.js在OpenLayers中，原本是地图容器。由于我要打造设计器并不是地图，
+所以不需要做那么复杂的地理信息处理。除了以上代码大部分采用OpenLayers原封代码外，
+以下代码都是简单的设计下。</p>
+
+<h3 id="section">3.创建图层基类和矢量图层类</h3>
+
+<p>矢量图层实际是一张画布，一个设计器需要多层画布。类似与PS中的层的概念。</p>
+
+<h3 id="section-1">4.创建修改控件类</h3>
+
+<p>使用Drag.js实现对控件的移动和缩放功能</p>
+
+<h3 id="renderer">5.创建Renderer类</h3>
+
+<p>OpenLayers原本</p>
+
 
 		</div>
 
@@ -203,27 +266,6 @@
 			<li><i class="fa fa-tags"></i></li>
 			  
 			<li>
-				<a href="http://jitlee.github.io/blog/tags.html#HTML5-ref">
-          HTML5 <span>(1)</span>
-          ,
-          </a>
-			</li>
-			
-			<li>
-				<a href="http://jitlee.github.io/blog/tags.html#HTML5+-ref">
-          HTML5+ <span>(1)</span>
-          ,
-          </a>
-			</li>
-			
-			<li>
-				<a href="http://jitlee.github.io/blog/tags.html#Javascript-ref">
-          Javascript <span>(1)</span>
-          ,
-          </a>
-			</li>
-			
-			<li>
 				<a href="http://jitlee.github.io/blog/tags.html#Canvas-ref">
           Canvas <span>(2)</span>
           ,
@@ -231,15 +273,15 @@
 			</li>
 			
 			<li>
-				<a href="http://jitlee.github.io/blog/tags.html#Image-ref">
-          Image <span>(1)</span>
+				<a href="http://jitlee.github.io/blog/tags.html#JS-ref">
+          JS <span>(1)</span>
           ,
           </a>
 			</li>
 			
 			<li>
-				<a href="http://jitlee.github.io/blog/tags.html#移动开发-ref">
-          移动开发 <span>(1)</span>
+				<a href="http://jitlee.github.io/blog/tags.html#面向对象，设计器-ref">
+          面向对象，设计器 <span>(1)</span>
           
           </a>
 			</li>
@@ -271,16 +313,15 @@
 
 		<ul class="pager">
 			
-			<li class="previous"><a href="http://jitlee.github.io/blog/the-keywords-in-javascript" title="JavaScript之关键字this">&larr; 上一篇</a></li>
+			<li class="previous"><a href="http://jitlee.github.io/blog/html5-image-editor" title="HTML5图片选剪裁择器">&larr; 上一篇</a></li>
 			 
-			<li class="next"><a href="http://jitlee.github.io/blog/html5-canvas-designer" title="HTML5之基于Canvas打造2D设计器">下一篇 &rarr;</a></li>
-			
+			<li class="next disabled"><a>下一篇 &rarr;</a> 
 		</ul>
 
 	</div>
 
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="/html5-image-editor" data-title="HTML5图片选剪裁择器" data-url=""/html5-image-editor></div>
+	<div class="ds-thread" data-thread-key="/html5-canvas-designer" data-title="HTML5之基于Canvas打造2D设计器" data-url=""/html5-canvas-designer></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
