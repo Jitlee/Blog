@@ -2,10 +2,29 @@
 layout: post
 title: Oracle Spitail根据经纬度获取结构化地址
 description: 由经纬度经纬度得到结构化地址解析。例于：
-categories: [html5]
-tags: [HTML5,HTML5+,Javascript,Canvas,Image,移动开发]
+tagline: 百度地图逆地址解析：http://developer.baidu.com/map/jsdemo.htm#i7_2
+categories: [WebGIS]
+image: /assets/media/get_location.jpg
+tags: [Oracle Spitail,Function,GIS]
 ---
 
+>外网环境的请出门右拐，百度LBS，恕不远送
+
+### 1.将地图矢量文件导入 OracleSpitail
+
+{% highlight sql %}
+- STR_A.shp 	-> XXX_MAP_STA_A	// 结构化地址
+- CDIS_S.shp 	-> XXX_MAP_CDIS_S	// 县级市面
+- TRA_CL.shp 	-> XXX_MAP_TRA_CL	// 公路中间线
+{% endhighlight %}
+
+导入之后，修正Geometry字段的SDO_SRID,SDO_ELEM_INFO属性(不修正有可能会导致无法创建空间索引和空间分析等问题)
+
+### 2.创建逆地址解析的Function
+
+使用SDO_WITHIN_DISTANCE方法优先查询附近的结构化地址，其次查找附近的公路，最后查找所在的县级市
+
+代码如下：
 
 {% highlight sql %}
 
@@ -105,3 +124,23 @@ BEGIN
 END F_GET_LOCATION;
 
 {% endhighlight %}
+
+### 3.创建Web服务，提供逆地址解析接口
+
+/api/services/rest/map/util/address/lon/lat
+
+{% highlight javascript %}
+
+var url = "http://127.0.0.1/api/services/rest/map/util/address/114.23/22.5635";
+
+[...]
+
+var address = {"provice":"广东省","city":"深圳市","district":"盐田区","street":"海山路","streetNumber":"79号"};
+
+{% endhighlight %}
+
+***
+
+效果图：
+
+<img src="{{ site.BASE_PATH }}{{page.image}}" width="85%"/>

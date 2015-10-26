@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ch-cn">
+
+	<head>
+		<title>Oracle Spitail根据经纬度获取结构化地址</title>
+		<meta charset="utf-8" /> 
+		<meta name="description" content="由经纬度经纬度得到结构化地址解析。例于："> 
+		<meta name="author" content="Jitlee.Wan">
+
+		<!-- Enable responsive viewport -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/syntax/syntax.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="http://jitlee.github.io/blog/assets/resources/font-awesome/css/font-awesome.min.css">
+		<link rel="shortcut icon" href="http://jitlee.github.io/blog/assets/ico/favicon.png">
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://jitlee.github.io/blog/assets/resources/bootstrap/js/bootstrap.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				if(window.location.href.replace(/\/$/g, "")=="http://jitlee.github.io/blog") {
+					$("#sidebar").css({width:'100%'});
+					$("#btnblog").click(function(){
+						$("#sidebar").animate({width:'33.3333%'},'slow');
+					});
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default visible-xs" role="navigation">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarHeaderCollapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				
+				<a type="button" class="navbar-toggle nav-link" href="http://github.com/jitlee">
+					<i class="fa fa-github"></i>
+				</a>
+				 
+				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/www.wpj@163.com">
+					<i class="fa fa-qq"></i>
+				</a>
+				 
+				<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/jitlee">
+					<i class="fa fa-weibo"></i>
+				</a>
+				 
+				<a type="button" class="navbar-toggle nav-link" href="mailto:www.wpj@163.com">
+					<i class="fa fa-envelope"></i>
+				</a>
+				
+
+				<a class="navbar-brand" href="http://jitlee.github.io/blog">
+					<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle img-circle-small"/> Jitlee-Wan
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="navbarHeaderCollapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="http://jitlee.github.io/blog">主页</a></li>
+					<li><a href="http://jitlee.github.io/blog/categories.html">分类</a></li>
+					<li><a href="http://jitlee.github.io/blog/tags.html">标签</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+
+		</nav>
+
+		<!-- nav-menu-dropdown -->
+		<div class="btn-group hidden-xs" id="nav-menu">
+			<button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
+				<i class="fa fa-bars"></i>
+			</button>
+			<ul class="dropdown-menu pull-right" role="menu">
+				<li><a href="http://jitlee.github.io/blog"><i class="fa fa-home"></i>主页</a></li>
+				<li><a href="http://jitlee.github.io/blog/categories.html"><i class="fa fa-folder"></i>分类</a></li>
+				<li><a href="http://jitlee.github.io/blog/tags.html"><i class="fa fa-tags"></i>标签</a></li>
+				<li class="divider"></li>
+				<li><a href="#"><i class="fa fa-arrow-up"></i>返回顶部</a></li>
+			</ul>
+		</div>
+
+		<div class="col-sm-4 sidebar hidden-xs" id="sidebar">
+			<! -- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<div class="sidebar-header-body">
+		<a href="http://jitlee.github.io/blog">
+			<img src="http://jitlee.github.io/blog/jitlee.gif" class="img-circle" />
+		</a>
+		<h3>
+	        <a class="title" href="http://jitlee.github.io/blog">Jitlee-Wan</a>
+	        <p class="role">如果你简单，这个世界就对你简单</p>
+	    </h3>
+	    <hr class="hr-line"/>
+		<h3>
+	         <p class="bio">嗨，我是万佳，一名来自深圳的js/swift开发狗，现在就职与一家互联网创业公司。</p>
+	    </h3>
+	    <hr class="hr-line"/>
+	   <ul class="navgation navgation-primary">
+	   		<li>
+		       	<a id="btnblog" href="http://jitlee.github.io/blog/#post" onclick="" target="_self">博客</a>
+	      	</li>
+	   		<li>
+		       	<a href="http://jitlee.github.io/blog/#source" target="_self">项目</a>
+	      	</li>
+	   		<li>
+		       	<a href="http://jitlee.github.io/blog/#" target="_self">订阅</a>
+	      	</li>
+	   		<li>
+		       	<a href="http://jitlee.github.io/blog/about.html" target="_self">关于</a>
+	      	</li>
+	    </ul>
+	 	<ul class="navgation navgation-social">
+	       	
+	    		<li>
+	    			<a class="github" href="http://github.com/jitlee">
+	    				<i class="fa fa-github"></i>
+	    			</a>
+	    		</li>
+	      	
+	       	
+	       	<li>
+		      	<a class="qq" href="http://twitter.com/www.wpj@163.com">
+	    				<i class="fa fa-qq"></i>
+		      	</a>
+		    </li>
+	      	
+	       	
+	       	<li>
+		      	<a class="weibo" href="http://twitter.com/jitlee">
+	    				<i class="fa fa-weibo"></i>
+		      	</a>
+		    </li>
+	      	
+	      	
+	      	<li>
+		      	<a class="email" href="mailto:www.wpj@163.com">
+	    				<i class="fa fa-envelope"></i>
+		      	</a>
+	      	</li>
+	      	
+	   </ul>
+	</div>
+</header>
+
+
+
+<! -- sidebar.html end -->
+
+		</div>
+
+		<div class="col-sm-8 col-sm-offset-4" id="container">
+			<div class="page-header">
+	<h1>Oracle Spitail根据经纬度获取结构化地址 </h1>
+</div>
+
+<article>
+
+	<div class="col-sm-10">
+		<span class="post-date">
+     2014年
+     10月
+     17日
+     <small style="text-transform:none">百度地图逆地址解析：http://developer.baidu.com/map/jsdemo.htm#i7_2</small> 
+   </span>
+		<div class="article_body" id="article_body">
+			<blockquote>
+  <p>外网环境的请出门右拐，百度LBS，恕不远送</p>
+</blockquote>
+
+<h3 id="oraclespitail">1.将地图矢量文件导入 OracleSpitail</h3>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="o">-</span> <span class="n">STR_A</span><span class="p">.</span><span class="n">shp</span> 	<span class="o">-&gt;</span> <span class="n">XXX_MAP_STA_A</span>	<span class="o">//</span> <span class="err">结构化地址</span>
+<span class="o">-</span> <span class="n">CDIS_S</span><span class="p">.</span><span class="n">shp</span> 	<span class="o">-&gt;</span> <span class="n">XXX_MAP_CDIS_S</span>	<span class="o">//</span> <span class="err">县级市面</span>
+<span class="o">-</span> <span class="n">TRA_CL</span><span class="p">.</span><span class="n">shp</span> 	<span class="o">-&gt;</span> <span class="n">XXX_MAP_TRA_CL</span>	<span class="o">//</span> <span class="err">公路中间线</span></code></pre></div>
+
+<p>导入之后，修正Geometry字段的SDO_SRID,SDO_ELEM_INFO属性(不修正有可能会导致无法创建空间索引和空间分析等问题)</p>
+
+<h3 id="function">2.创建逆地址解析的Function</h3>
+
+<p>使用SDO_WITHIN_DISTANCE方法优先查询附近的结构化地址，其次查找附近的公路，最后查找所在的县级市</p>
+
+<p>代码如下：</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">OR</span> <span class="k">REPLACE</span> <span class="k">FUNCTION</span> <span class="n">F_GET_LOCATION</span><span class="p">(</span><span class="n">lon</span> <span class="nb">NUMBER</span><span class="p">,</span> <span class="n">lat</span> <span class="nb">NUMBER</span><span class="p">)</span>
+  <span class="k">RETURN</span> <span class="n">VARCHAR2</span> <span class="k">IS</span>
+  <span class="c1">-- 作者：万品佳</span>
+  <span class="c1">-- 时间：2014-10-17</span>
+  <span class="c1">-- 描述：根据经纬度获取结构化地址</span>
+  <span class="c1">-- 返回值格式：省-市-区-街-门牌号</span>
+  <span class="c1">-- 优先采取str_a的地址，其次为tra_cl的地址</span>
+  <span class="n">v_provice</span>       <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;广东省&#39;</span><span class="p">;</span> <span class="c1">-- 省</span>
+  <span class="n">v_city</span>          <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;深圳市&#39;</span><span class="p">;</span> <span class="c1">-- 市</span>
+  <span class="n">v_district</span>      <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">-- 区</span>
+  <span class="n">v_street</span>        <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">-- 街</span>
+  <span class="n">v_street_number</span> <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">-- 门牌号</span>
+  <span class="n">v_point</span>         <span class="n">sdo_geometry</span><span class="p">;</span> <span class="c1">-- 点</span>
+  <span class="n">v_str_radius</span>    <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DISTANCE=100 UNIT=METER&#39;</span><span class="p">;</span> <span class="c1">-- 结构化地址搜索距离半径（单位米）</span>
+  <span class="n">v_tra_radius</span>    <span class="n">varchar2</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;DISTANCE=1000 UNIT=METER&#39;</span><span class="p">;</span> <span class="c1">-- 公路搜索距离半径（单位米）</span>
+<span class="k">BEGIN</span>
+  <span class="c1">-- 定义点</span>
+  <span class="n">v_point</span> <span class="p">:</span><span class="o">=</span> <span class="n">MDSYS</span><span class="p">.</span><span class="n">SDO_GEOMETRY</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span>
+                                <span class="mi">4326</span><span class="p">,</span>
+                                <span class="n">SDO_POINT_TYPE</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="k">NULL</span><span class="p">),</span>
+                                <span class="k">NULL</span><span class="p">,</span>
+                                <span class="k">NULL</span><span class="p">);</span>
+
+  <span class="c1">-- 从附近的结构化地址查找       </span>
+  <span class="k">BEGIN</span>
+    <span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">ROAD</span><span class="p">,</span> <span class="n">B</span><span class="p">.</span><span class="n">HOUSE_NUMBER</span>
+      <span class="k">INTO</span> <span class="n">v_street</span><span class="p">,</span> <span class="n">v_street_number</span>
+      <span class="k">FROM</span> <span class="n">XXX_MAP_STR_A</span> <span class="n">B</span><span class="p">,</span>
+           <span class="p">(</span><span class="k">SELECT</span> <span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
+                   <span class="n">SDO_GEOM</span><span class="p">.</span><span class="n">SDO_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span>
+                                         <span class="n">v_point</span><span class="p">,</span>
+                                         <span class="mi">0</span><span class="p">.</span><span class="mi">0001</span><span class="p">,</span>
+                                         <span class="s1">&#39;UNIT=M&#39;</span><span class="p">)</span> <span class="n">DISTANCE</span>
+              <span class="k">FROM</span> <span class="n">XXX_MAP_STR_A</span> <span class="n">A</span>
+             <span class="k">WHERE</span> <span class="n">A</span><span class="p">.</span><span class="n">NAME</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+               <span class="k">AND</span> <span class="n">SDO_WITHIN_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span> <span class="n">v_point</span><span class="p">,</span> <span class="n">v_str_radius</span><span class="p">)</span> <span class="o">=</span>
+                   <span class="s1">&#39;TRUE&#39;</span>
+             <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">DISTANCE</span><span class="p">)</span> <span class="k">C</span>
+     <span class="k">WHERE</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span>
+       <span class="k">AND</span> <span class="n">ROWNUM</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">EXCEPTION</span>
+    <span class="k">WHEN</span> <span class="n">NO_DATA_FOUND</span> <span class="k">THEN</span>
+      <span class="n">v_street</span>        <span class="p">:</span><span class="o">=</span> <span class="k">NULL</span><span class="p">;</span>
+      <span class="n">v_street_number</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">END</span><span class="p">;</span>
+  <span class="n">IF</span> <span class="n">v_street</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span>
+    <span class="c1">-- 如果结构化地址查找不到就查找附近的公路</span>
+    <span class="k">BEGIN</span>
+      <span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">NAME</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">INTO</span> <span class="n">v_street</span><span class="p">,</span> <span class="n">v_street_number</span>
+        <span class="k">FROM</span> <span class="n">XXX_MAP_TRA_CL</span> <span class="n">B</span><span class="p">,</span>
+             <span class="p">(</span><span class="k">SELECT</span> <span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
+                     <span class="n">SDO_GEOM</span><span class="p">.</span><span class="n">SDO_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span>
+                                           <span class="n">v_point</span><span class="p">,</span>
+                                           <span class="mi">0</span><span class="p">.</span><span class="mi">0001</span><span class="p">,</span>
+                                           <span class="s1">&#39;UNIT=M&#39;</span><span class="p">)</span> <span class="n">DISTANCE</span>
+                <span class="k">FROM</span> <span class="n">XXX_MAP_TRA_CL</span> <span class="n">A</span>
+               <span class="k">WHERE</span> <span class="n">A</span><span class="p">.</span><span class="n">NAME</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+                 <span class="k">AND</span> <span class="n">SDO_WITHIN_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span> <span class="n">v_point</span><span class="p">,</span> <span class="n">v_tra_radius</span><span class="p">)</span> <span class="o">=</span>
+                     <span class="s1">&#39;TRUE&#39;</span>
+               <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">DISTANCE</span><span class="p">)</span> <span class="k">C</span>
+       <span class="k">WHERE</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span>
+         <span class="k">AND</span> <span class="n">ROWNUM</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">EXCEPTION</span>
+      <span class="k">WHEN</span> <span class="n">NO_DATA_FOUND</span> <span class="k">THEN</span>
+        <span class="n">v_street</span>        <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+        <span class="n">v_street_number</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">END</span><span class="p">;</span>
+  <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+
+  <span class="c1">--查找区</span>
+  <span class="k">BEGIN</span>
+    <span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">NAME</span>
+      <span class="k">INTO</span> <span class="n">v_district</span>
+      <span class="k">FROM</span> <span class="n">XXX_MAP_CDIS_S</span> <span class="n">B</span><span class="p">,</span>
+           <span class="p">(</span><span class="k">SELECT</span> <span class="n">A</span><span class="p">.</span><span class="n">ID</span><span class="p">,</span>
+                   <span class="n">SDO_GEOM</span><span class="p">.</span><span class="n">SDO_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span>
+                                         <span class="n">v_point</span><span class="p">,</span>
+                                         <span class="mi">0</span><span class="p">.</span><span class="mi">0001</span><span class="p">,</span>
+                                         <span class="s1">&#39;UNIT=M&#39;</span><span class="p">)</span> <span class="n">DISTANCE</span>
+              <span class="k">FROM</span> <span class="n">XXX_MAP_CDIS_S</span> <span class="n">A</span>
+             <span class="k">WHERE</span> <span class="n">A</span><span class="p">.</span><span class="n">NAME</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+               <span class="k">AND</span> <span class="n">SDO_WITHIN_DISTANCE</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">GEOMETRY</span><span class="p">,</span> <span class="n">v_point</span><span class="p">,</span> <span class="n">v_str_radius</span><span class="p">)</span> <span class="o">=</span>
+                   <span class="s1">&#39;TRUE&#39;</span>
+             <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">DISTANCE</span><span class="p">)</span> <span class="k">C</span>
+     <span class="k">WHERE</span> <span class="k">C</span><span class="p">.</span><span class="n">ID</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">ID</span>
+       <span class="k">AND</span> <span class="n">ROWNUM</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">EXCEPTION</span>
+    <span class="k">WHEN</span> <span class="n">NO_DATA_FOUND</span> <span class="k">THEN</span>
+      <span class="n">v_district</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+  <span class="k">END</span><span class="p">;</span>
+
+  <span class="k">RETURN</span> <span class="s1">&#39;{&quot;provice&quot;:&quot;&#39;</span> <span class="o">||</span> <span class="n">v_provice</span> <span class="o">||</span> <span class="s1">&#39;&quot;,&quot;city&quot;:&quot;&#39;</span> <span class="o">||</span> <span class="n">v_city</span> <span class="o">||</span> <span class="s1">&#39;&quot;,&quot;district&quot;:&quot;&#39;</span> <span class="o">||</span> <span class="n">v_district</span> <span class="o">||</span> <span class="s1">&#39;&quot;,&quot;street&quot;:&quot;&#39;</span> <span class="o">||</span> <span class="n">v_street</span> <span class="o">||</span> <span class="s1">&#39;&quot;,&quot;streetNumber&quot;:&quot;&#39;</span> <span class="o">||</span> <span class="n">v_street_number</span> <span class="o">||</span> <span class="s1">&#39;&quot;}&#39;</span><span class="p">;</span>
+<span class="k">END</span> <span class="n">F_GET_LOCATION</span><span class="p">;</span></code></pre></div>
+
+<h3 id="web">3.创建Web服务，提供逆地址解析接口</h3>
+
+<p>/api/services/rest/map/util/address/lon/lat</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">&quot;http://127.0.0.1/api/services/rest/map/util/address/114.23/22.5635&quot;</span><span class="p">;</span>
+
+<span class="p">[...]</span>
+
+<span class="kd">var</span> <span class="nx">address</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;provice&quot;</span><span class="o">:</span><span class="s2">&quot;广东省&quot;</span><span class="p">,</span><span class="s2">&quot;city&quot;</span><span class="o">:</span><span class="s2">&quot;深圳市&quot;</span><span class="p">,</span><span class="s2">&quot;district&quot;</span><span class="o">:</span><span class="s2">&quot;盐田区&quot;</span><span class="p">,</span><span class="s2">&quot;street&quot;</span><span class="o">:</span><span class="s2">&quot;海山路&quot;</span><span class="p">,</span><span class="s2">&quot;streetNumber&quot;</span><span class="o">:</span><span class="s2">&quot;79号&quot;</span><span class="p">};</span></code></pre></div>
+
+<hr />
+
+<p>效果图：</p>
+
+<p><img src="http://jitlee.github.io/blog/assets/media/get_location.jpg" width="85%" /></p>
+
+		</div>
+
+		
+		<ul class="tag_box list-unstyled list-inline">
+			<li><i class="fa fa-folder-open"></i></li>
+			  
+			<li><a href="http://jitlee.github.io/blog/categories.html#webgis-ref">
+          webgis <span>(1)</span>
+          
+        </a></li>
+			 
+		</ul>
+		 
+		<ul class="list-inline">
+			<li><i class="fa fa-tags"></i></li>
+			  
+			<li>
+				<a href="http://jitlee.github.io/blog/tags.html#Oracle Spitail-ref">
+          Oracle Spitail <span>(1)</span>
+          ,
+          </a>
+			</li>
+			
+			<li>
+				<a href="http://jitlee.github.io/blog/tags.html#Function-ref">
+          Function <span>(1)</span>
+          ,
+          </a>
+			</li>
+			
+			<li>
+				<a href="http://jitlee.github.io/blog/tags.html#GIS-ref">
+          GIS <span>(1)</span>
+          
+          </a>
+			</li>
+			  
+		</ul>
+		
+
+		<hr>
+
+		<div>
+			<section class="share col-sm-6">
+				<h4 class="section-title">分享</h4>
+				<a class="btn btn-default btn-sm twitter" href="javascript:void(0);">
+					<i class="fa fa-weibo fa-lg"></i> 微博
+				</a>
+				<a class="btn btn-default btn-sm facebook" href="javascript:void(0);">
+					<i class="fa fa-weixin fa-lg"></i> 微信
+				</a>
+			</section>
+
+			<section class="col-sm-6 author">
+				<img src="http://jitlee.github.io/blog/jitlee.gif" style="height:100px;width:100px;" class="img-rounded author-image" />
+				<h4 class="section-title author-name"><b>Jitlee-Wan</b><br/><p style="color:#888;font-size:13px;">如果你简单，这个世界就对你简单</p></h4>
+				<p class="author-bio">嗨，我是万佳，一名来自深圳的js/swift开发狗，现在就职与一家互联网创业公司。</p>
+			</section>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<ul class="pager">
+			
+			<li class="previous disabled"><a>&larr; 上一篇</a></li>
+			 
+			<li class="next"><a href="http://jitlee.github.io/blog/the-keywords-in-javascript" title="JavaScript之关键字this">下一篇 &rarr;</a></li>
+			
+		</ul>
+
+	</div>
+
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="/oracle-spatial-get-location" data-title="Oracle Spitail根据经纬度获取结构化地址" data-url=""/oracle-spatial-get-location></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"jitlee"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+	<!-- 多说公共JS代码 end -->
+
+</article>
+<div class="clearfix"></div>
+
+			<footer class="navbar navbar-default">
+				<div class="container">
+					<p class="navbar-text pull-left">&copy; 2015 Jitlee.Wan
+						基于 <a class="navbar-button" href="https://pages.github.com/">Github Pages</a> 搭建
+						采用<a class="navbar-button" href="https://github.com/twbs/bootstrap">Bootstrap3</a> 和 <a class="navbar-button" href="https://github.com/jekyll/jekyll">Jekyll</a> 技术
+						感谢talk2ankan提供的<a class="navbar-button" href="https://github.com/talk2ankan/uno-dbyll">uno-dbyll</a> 主题和 <a class="navbar-button" href="http://duoshuo.com/">多说</a>提供的评论系统
+						最重要的是感谢我最亲爱的老婆<b>zoey</b>
+					</p>
+				</div>
+			</footer>
+		</div>
+	</body>
+
+</html>
