@@ -435,4 +435,4 @@ function ImageEditor(containerId, aspectRatio) {
 
 ---
 
-<span style="color:red">旋转接口未完待续。。。</span>（其实功能已完成，没有写对外接口）</font>
+<span style="color:red">旋转接口未完待续。。。</span>（其实功能已完成，没有写对外接口）
