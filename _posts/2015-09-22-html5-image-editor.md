@@ -432,3 +432,7 @@ function ImageEditor(containerId, aspectRatio) {
 }
 
 {% endhighlight %}
+
+---
+
+<font color=red>旋转接口未完待续。。。（其实功能已完成，没有写对外接口）</font>
