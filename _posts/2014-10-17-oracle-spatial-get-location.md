@@ -1,14 +1,14 @@
 ---
 layout: post
 title: Oracle Spitail根据经纬度获取结构化地址
-description: 由经纬度经纬度得到结构化地址解析。例于：
-tagline: 百度地图逆地址解析：http://developer.baidu.com/map/jsdemo.htm#i7_2
+description: 由经纬度经纬度得到结构化地址解析。例于经纬度[114.23,22.5635]获取结果：{"provice":"广东省","city":"深圳市","district":"盐田区","street":"海山路","streetNumber":"79号"};
 categories: [WebGIS]
 image: /assets/media/get_location.jpg
-tags: [Oracle Spitail,Function,GIS]
+tags: [Oracle Spitail,SDO_WITHIN_DISTANCE,GIS]
 ---
 
->外网环境的请出门右拐，百度LBS，恕不远送
+>外网环境的请出门右拐，百度LBS，恕不远送，
+百度地图逆地址解析：http://developer.baidu.com/map/jsdemo.htm#i7_2
 
 ### 1.将地图矢量文件导入 OracleSpitail
 
