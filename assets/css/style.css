@@ -82,19 +82,19 @@ footer p{
 
 @media only screen and (min-width: 640px) and (max-width: 1023px) {
 	#sidebar {
-		background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background@2x.jpg");
+		background-image: url("/assets/media/background-cover.png"), url("/assets/media/background@2x.jpg");
 	}
 }
 
 @media only screen and (max-width: 639px) {
 	#sidebar {
-		background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background.jpg");
+		background-image: url("/assets/media/background-cover.png"), url("/assets/media/background.jpg");
 	}
 }
 
 @media only screen and (min-width: 1024px) {
 	#sidebar {
-		background-image: url("/blog/assets/media/background-cover.png"), url("/blog/assets/media/background@2x.jpg");
+		background-image: url("/assets/media/background-cover.png"), url("/assets/media/background@2x.jpg");
 	}
 }
 
