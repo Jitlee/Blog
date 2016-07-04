@@ -23,6 +23,11 @@ Swagger的优点我就不细说了，下面我要说的如何将SwaggerUI整合�
 #### 本文demo源码下载
 [https://github.com/Jitlee/thinkphp-swagger](https://github.com/Jitlee/thinkphp-swagger)
 
+#### 本文demo演示地址
+[http://yyg.ritacc.net:88/api.php](http://yyg.ritacc.net:88/api.php)
+
+---
+
 ### 1. 基于ThinkPHP搭建一个简单手机登陆后台服务
 
 #### 1.1. 配置利用ThinkPHP5.0 自动创建一个API模块
