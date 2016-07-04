@@ -11,17 +11,17 @@ tags: [PHP,Swagger UI,API]
 > 公司采用的使用 SpringMVC + Swagger 框架搭建的一套API服务框架，手机客户端能够很方便的调用API服务。
 Swagger的优点我就不细说了，下面我要说的如何将SwaggerUI整合到ThinkPHP 5.0中去。
 
-##### ThinkPHP5下载载地址
+#### ThinkPHP5下载载地址
 [http://www.thinkphp.cn/down.html](http://www.thinkphp.cn/down.html)
 
-##### ThinkPHP5完全开发手册
+#### ThinkPHP5完全开发手册
 [http://www.kancloud.cn/manual/thinkphp5](http://www.kancloud.cn/manual/thinkphp5)
 
-##### SwaggerUI
+#### SwaggerUI
 [http://swagger.io/swagger-ui/](http://swagger.io/swagger-ui/)
 
-##### 该文档源码下载
-
+#### 本文demo源码下载
+[https://github.com/Jitlee/thinkphp-swagger](https://github.com/Jitlee/thinkphp-swagger)
 
 ### 1. 基于ThinkPHP搭建一个简单手机登陆后台服务
 
