@@ -3,7 +3,7 @@ layout: post
 title: ThinkPHP API接口文档 Swagger UI 整合工具
 description: 基于TP5.0开发的简单版SwaggerUI 扫描器，够用就好
 categories: [ThinkPHP]
-image: 
+image: /assets/media/swagger.png
 geometry: 
 tags: [PHP,Swagger UI,API]
 ---
@@ -383,6 +383,8 @@ exit;
 {% endhighlight %}
 
 在浏览器中输入：[http://localhost:8888/api.php](http://localhost:8888/api.php)
+
+<img src="{{ site.BASE_PATH }}{{page.image}}" width="85%"/>
 
 
 
