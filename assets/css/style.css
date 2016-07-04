@@ -181,3 +181,5 @@ ul.navgation.navgation-social a i {
 	font-size: 22px;
 	color: #fff;
 }
+
+pre { white-space: pre; overflow: auto; }
