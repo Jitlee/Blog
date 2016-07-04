@@ -45,4 +45,6 @@ console.log("最大的数字是：" + result);
 
 {% endhighlight %}
 
+*代码用的Chrome控制台写的，部分方法和属性需要HTML5支持*
+
 
