@@ -387,4 +387,7 @@ exit;
 <img src="{{ site.BASE_PATH }}{{page.image}}" width="85%"/>
 
 
+*目前功能比较简单，还未在正式环境中使用，持续更新中...*
+
+
 
