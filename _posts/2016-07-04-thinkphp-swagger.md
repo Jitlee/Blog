@@ -11,18 +11,21 @@ tags: [PHP,Swagger UI,API]
 > 公司采用的使用 SpringMVC + Swagger 框架搭建的一套API服务框架，手机客户端能够很方便的调用API服务。
 Swagger的优点我就不细说了，下面我要说的如何将SwaggerUI整合到ThinkPHP 5.0中去。
 
-# ThinkPHP5下载载地址
+##### ThinkPHP5下载载地址
 [http://www.thinkphp.cn/down.html](http://www.thinkphp.cn/down.html)
 
-# ThinkPHP5完全开发手册
+##### ThinkPHP5完全开发手册
 [http://www.kancloud.cn/manual/thinkphp5](http://www.kancloud.cn/manual/thinkphp5)
 
-# SwaggerUI
+##### SwaggerUI
 [http://swagger.io/swagger-ui/](http://swagger.io/swagger-ui/)
+
+##### 该文档源码下载
+
 
 ### 1. 基于ThinkPHP搭建一个简单手机登陆后台服务
 
-####1.1. 配置利用ThinkPHP5.0 自动创建一个API模块
+#### 1.1. 配置利用ThinkPHP5.0 自动创建一个API模块
 
 修改ThinkPHP应用根目录的build.php文件
 
@@ -58,20 +61,20 @@ return [
 
 如果看到输出Successed，则表示自动生成成功。
 
-###1.2. 修改刚刚生成的api模块下的config.php文件，默认输出都为json类型
+### 1.2. 修改刚刚生成的api模块下的config.php文件，默认输出都为json类型
 
 {% highlight php %}
 
 <?php
 //配置文件
 return [
-	'default_return_type'	=> 'json', // 修改控制器默认输出json对象
-	'url_param_type'			=> 1, // URL参数方式 0 按名称成对解析 1 按顺序解析
+	'default_return_type' => 'json', // 修改控制器默认输出json对象
+	'url_param_type' => 1, // URL参数方式 0 按名称成对解析 1 按顺序解析
 ];
 
 {% endhighlight %}
 
-###1.3. <span id = "anchor">在刚刚自动生成的/application/api/controoler/Passport.php文件下添加3个API方法</span>
+### 1.3. <span id = "anchor">在刚刚自动生成的/application/api/controoler/Passport.php文件下添加3个API方法</span>
 
 {% highlight php %}
 
