@@ -2,7 +2,7 @@
 layout: post
 title: 阿里云CentOS7.2 部署Apache + PHP + MySQL
 description: 本文讲述的是用yum命令在阿里云最新的CentOS7.2 环境下安装Apache、PHP和MySQL
-categories: [ThinkPHP]
+categories: [Linux]
 image:
 geometry: 
 tags: [阿里云 Linux CentOS]
