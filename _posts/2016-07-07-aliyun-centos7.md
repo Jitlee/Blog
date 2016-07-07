@@ -5,7 +5,7 @@ description: 本文讲述的是用yum命令在阿里云最新的CentOS7.2 环境
 categories: [Linux]
 image:
 geometry: 
-tags: [阿里云 Linux CentOS]
+tags: [阿里云 CentOS MySql Apache PHP]
 ---
 
 > 买的几十块钱的服务器，我最新安装的是Mysql, 由于走了弯路，重置过了好几次。最后发现关键点就是没有安装阿里云镜像源，
